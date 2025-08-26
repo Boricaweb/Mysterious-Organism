@@ -13,7 +13,13 @@ const mockUpStrand = () => {
   return newStrand;
 };
 
-
+//P.aequor generator
+const pAequorFactory = (specimenNum, dna) => {
+  return {
+    _specimenNum: specimenNum,
+    _dna: dna,
+  }
+}
 
 
 
