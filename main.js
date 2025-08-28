@@ -19,7 +19,6 @@ const pAequorFactory = (specimenNum, dna) => {
     _specimenNum: specimenNum,
     _dna: dna,
     mutate() {
-      console.log(this._dna);
       let i = 0;
       while (i < this._dna.length) {
         let randomRna = returnRandBase();
@@ -41,17 +40,39 @@ const pAequorFactory = (specimenNum, dna) => {
       }
       let percentage = Math.floor((count / pAequor['_dna'].length) * 100);
       return `${this._specimenNum}: [${this._dna}]\n${pAequor['_specimenNum']}: [${pAequor['_dna']}]\nComparison result: ${percentage}% DNA in common.`;
+    },
+    willLikelySurvive() {
+      let countC = 0;
+      let countG = 0;
+      for (let i = 0; i < this._dna.length; i++) {
+        if (this._dna[i] === 'C') {
+          countC++;
+        } else if (this._dna[i] === 'G') {
+          countG++;
+        }
+      }
+      if (Math.floor((countC / this._dna.length) * 100) >= 60 || Math.floor((countG / this._dna.length) * 100) >= 60) {
+        return true;
+      } else {
+        return false;
+      }
     }
   }
 };
 
 //Compare DNA
 const myDna = {_specimenNum: 'specimen#2', _dna: mockUpStrand()};
+//DNA input
+const pAquorInput = mockUpStrand();
+
 
 //All log for testing function
-console.log(pAequorFactory('specimen#1', mockUpStrand()).compareDNA(myDna));
-console.log(pAequorFactory('specimen#1', mockUpStrand()).mutate());
+console.log(pAquorInput);
+//console.log(returnRandBase());
 //console.log(mockUpStrand());
-
+//console.log(pAequorFactory('specimen#1', pAquorInput));
+//console.log(pAequorFactory('specimen#1', pAquorInput).mutate());
+//console.log(pAequorFactory('specimen#1', pAquorInput).compareDNA(myDna));
+console.log(pAequorFactory('specimen#1', pAquorInput).willLikelySurvive());
 
 
