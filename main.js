@@ -59,6 +59,19 @@ const pAequorFactory = (specimenNum, dna) => {
       } else {
         return false;
       }
+    },
+    complementStrand() {
+      let dnaStrand = [];
+      for (let i = 0; i < this._dna.length; i++) {
+        switch (this._dna[i]) {
+          case 'A': dnaStrand[i] = 'T'; break;
+          case 'T': dnaStrand[i] = 'A'; break;
+          case 'C': dnaStrand[i] = 'G'; break;
+          case 'G': dnaStrand[i] = 'C'; break;
+          default: break;
+        }
+      }
+      return dnaStrand;
     }
   }
 };
@@ -72,10 +85,10 @@ const randomSurviveDna = () => {
       let countC = 0;
       let countG = 0;
       //Loop for check the DNA base which can survive 
-      for (let k = 0; k < arrayOfDna.length; k++) {
-        if (arrayOfDna[k] === 'C') {
+      for (let j = 0; j < arrayOfDna.length; j++) {
+        if (arrayOfDna[j] === 'C') {
           countC++;
-        } else if (arrayOfDna[k] === 'G') {
+        } else if (arrayOfDna[j] === 'G') {
           countG++;
         }
       }
@@ -96,13 +109,14 @@ const pAquorInput = mockUpStrand();
 
 
 //All log for testing function
-//console.log(pAquorInput);
+console.log(pAquorInput);
 //console.log(returnRandBase());
 //console.log(mockUpStrand());
 //console.log(pAequorFactory('specimen#1', pAquorInput));
-//console.log(pAequorFactory('specimen#1', pAquorInput).mutate());
-//console.log(pAequorFactory('specimen#1', pAquorInput).compareDNA(myDna));
-//console.log(pAequorFactory('specimen#1', pAquorInput).willLikelySurvive());
-//console.log(randomSurviveDna());
+console.log(pAequorFactory('specimen#1', pAquorInput).mutate());
+console.log(pAequorFactory('specimen#1', pAquorInput).compareDNA(myDna));
+console.log(pAequorFactory('specimen#1', pAquorInput).willLikelySurvive());
+console.log(randomSurviveDna());
+console.log(pAequorFactory('specimen#1', pAquorInput).complementStrand());
 
 
