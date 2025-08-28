@@ -19,10 +19,14 @@ const pAequorFactory = (specimenNum, dna) => {
     _specimenNum: specimenNum,
     _dna: dna,
     mutate() {
+      console.log(this._dna);
       let i = 0;
       while (i < this._dna.length) {
-        if (returnRandBase() !== this._dna[i]) {
-          this._dna[i] = returnRandBase();
+        let randomRna = returnRandBase();
+        if (randomRna !== this._dna[i]) {
+          this._dna[i] = randomRna;
+        } else {
+          i--;
         }
         i++;
       }
@@ -30,18 +34,23 @@ const pAequorFactory = (specimenNum, dna) => {
     },
     compareDNA(pAequor) {
       let count = 0;
-      for (let i = 0; i < pAequor['dna'].length; i++) {        
-        if (pAequor['dna'][i] === this._dna[i]) {
+      for (let i = 0; i < pAequor['_dna'].length; i++) {        
+        if (pAequor['_dna'][i] === this._dna[i]) {
           count++;
         }
       }
-      let percentage = (count / pAequor['dna'].length) * 100;
-      return `${this._specimenNum} and ${pAequor['specimenNum']} have ${percentage}% DNA in common.`;
+      let percentage = Math.floor((count / pAequor['_dna'].length) * 100);
+      return `${this._specimenNum}: [${this._dna}]\n${pAequor['_specimenNum']}: [${pAequor['_dna']}]\nComparison result: ${percentage}% DNA in common.`;
     }
   }
 };
 
-//console.log(pAequorFactory(specimenNum, mockUpStrand()))
+//Compare DNA
+const myDna = {_specimenNum: 'specimen#2', _dna: mockUpStrand()};
+
+//All log for testing function
+console.log(pAequorFactory('specimen#1', mockUpStrand()).compareDNA(myDna));
+console.log(pAequorFactory('specimen#1', mockUpStrand()).mutate());
 //console.log(mockUpStrand());
 
 
